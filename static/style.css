@@ -1,373 +1,112 @@
 :root {
-    --primary: #ff9933;
-    /* Saffron Orange */
+    --primary: #ff9933;   
     --primary-dark: #cc7000;
-    --dark: #2c3e50;
-    /* Dark Blue-Grey */
-    --light: #f8f9fa;
-    /* Light Grey Background */
+    --dark: #2c3e50;      
+    --light: #f8f9fa;     
     --white: #ffffff;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Native System Fonts */
     margin: 0;
     padding: 0;
     background-color: var(--light);
     color: var(--dark);
+    -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
 }
 
-/* --- NAVIGATION BAR STYLING --- */
-/* This fixes the formatting to push Logo Left and Links Right */
+/* --- NAVBAR --- */
 .navbar {
     background-color: var(--dark);
     padding: 0 20px;
     height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;                
+    justify-content: space-between; 
+    align-items: center;          
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-/* Left Side: Logo */
-.logo-container {
-    display: flex;
-    align-items: center;
-}
+.logo-container { display: flex; align-items: center; }
+.brand-link { text-decoration: none; display: flex; align-items: center; color: var(--white); }
+.nav-logo { height: 40px; width: auto; border-radius: 50%; margin-right: 10px; border: 2px solid var(--primary); }
+.brand-name { font-size: 1.5rem; font-weight: bold; letter-spacing: 0.5px; }
 
-.brand-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    color: var(--white);
-}
+.nav-links { display: flex; gap: 15px; align-items: center; }
+.nav-item { color: #ddd; text-decoration: none; font-weight: 500; font-size: 1rem; padding: 10px; }
+.highlight-btn { background-color: var(--primary); color: white !important; padding: 8px 20px; border-radius: 20px; }
 
-.nav-logo {
-    height: 40px;
-    width: auto;
-    border-radius: 50%;
-    margin-right: 10px;
-    border: 2px solid var(--primary);
-}
+/* --- LAYOUT --- */
+.container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
 
-.brand-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
+/* --- HERO --- */
+.hero { text-align: center; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; padding-bottom: 25px; }
+.hero-img { width: 100%; height: 250px; object-fit: cover; } /* Adjusted height for mobile */
 
-/* Right Side: Links */
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
+.home-mantra { background-color: #fff8e1; border-left: 5px solid var(--primary); padding: 15px; margin: 15px; border-radius: 4px; }
+.sanskrit { font-size: 1.1rem; color: var(--primary-dark); font-weight: bold; margin-bottom: 5px; }
 
-.nav-item {
-    color: #ddd;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s;
-    padding: 8px 12px;
-}
-
-.nav-item:hover {
-    color: var(--primary);
-}
-
-.highlight-btn {
-    background-color: var(--primary);
-    color: white !important;
-    padding: 8px 20px;
-    border-radius: 20px;
-    transition: background 0.3s;
-}
-
-.highlight-btn:hover {
-    background-color: var(--primary-dark);
-}
-
-/* --- MAIN CONTAINER --- */
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-/* --- HERO SECTION --- */
-.hero {
-    text-align: center;
-    background: var(--white);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-}
-
-.hero-img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-}
-
-.home-mantra {
-    background-color: #fff8e1;
-    border-left: 5px solid var(--primary);
-    padding: 15px;
-    margin: 20px auto;
-    max-width: 800px;
-    border-radius: 4px;
-}
-
-.sanskrit {
-    font-size: 1.2rem;
-    color: var(--primary-dark);
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* --- ABOUT PROJECT / HIGHLIGHTS SECTION (New) --- */
-.about-project {
-    margin: 40px 0;
-    padding: 40px 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.about-project h2 {
-    color: var(--dark);
-    margin-bottom: 30px;
-    font-size: 2rem;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.stat-card {
-    background: #fff8e1;
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid #ffe0b3;
-    transition: transform 0.3s;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-}
-
-.stat-card .icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.stat-card h3 {
-    color: var(--primary-dark);
-    margin: 10px 0;
-}
-
-.stat-card p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-.stat-card strong {
-    color: var(--dark);
-    font-weight: bold;
-}
+/* --- PROJECT HIGHLIGHTS --- */
+.about-project { margin: 30px 0; padding: 30px 15px; background-color: #fff; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.stat-card { background: #fff8e1; padding: 20px; border-radius: 8px; border: 1px solid #ffe0b3; }
+.stat-card .icon { font-size: 2rem; }
+.stat-card h3 { color: var(--primary-dark); margin: 10px 0; }
+.stat-card p { color: #555; line-height: 1.6; font-size: 0.95rem; }
 
 /* --- SANSKAR GRID --- */
-.sanskar-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.card {
-    background: var(--white);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    padding-bottom: 15px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.card h3 {
-    margin: 15px 0 5px;
-    color: var(--dark);
-}
-
-.role {
-    color: #666;
-    font-style: italic;
-    margin-bottom: 15px;
-}
+.sanskar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; } /* Smaller min-width for mobile grid */
+.card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding-bottom: 10px; text-align: center; }
+.card img { width: 100%; height: 140px; object-fit: cover; }
+.card h3 { margin: 10px 0 5px; font-size: 1.1rem; color: var(--dark); }
+.role { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
 
 /* --- BUTTONS --- */
-.btn {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
+.btn { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; font-size: 1rem; width: auto; }
+.btn-small { padding: 8px 16px; border: 1px solid var(--primary); color: var(--primary); background: transparent; border-radius: 20px; font-size: 0.9rem; }
 
-.btn:hover {
-    background: var(--primary-dark);
-}
-
-.btn-small {
-    background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 5px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.btn-small:hover {
-    background: var(--primary);
-    color: white;
-}
+/* --- FORM --- */
+.form-container { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+input, select { width: 100%; padding: 14px; margin: 8px 0 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; background: #fff; } /* Larger touch area */
+.alert { padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+.success { background: #d4edda; color: #155724; }
+.warning { background: #fff3cd; color: #856404; }
 
 /* --- MODAL --- */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow-y: auto;
-}
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.modal-content { background-color: #fff; margin: 10% auto; padding: 20px; border-radius: 10px; width: 85%; max-width: 500px; position: relative; }
+.close { position: absolute; right: 15px; top: 10px; font-size: 30px; padding: 10px; color: #555; } /* Larger touch area for close */
+.modal-image { width: 100%; max-height: 250px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; border: 2px solid #eee; background: #fafafa; }
+.mantra-box { background-color: #fff3cd; border-left: 5px solid var(--primary); padding: 15px; margin: 15px 0; text-align: center; font-family: 'Georgia', serif; font-style: italic; color: #5c4300; font-size: 1.1rem; }
 
-.modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    animation: slideDown 0.3s;
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.close {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.close:hover {
-    color: var(--dark);
-}
-
-.modal-image {
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border: 2px solid #eee;
-    background: #fafafa;
-}
-
-.mantra-box {
-    background-color: #fff3cd;
-    border-left: 5px solid var(--primary);
-    padding: 15px;
-    margin: 15px 0;
-    text-align: center;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    color: #5c4300;
-    font-size: 1.1rem;
-}
-
-/* --- FORMS (Used in Book.html) --- */
-.form-container {
-    max-width: 500px;
-    margin: 40px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-input,
-select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-label {
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.alert {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-.success {
-    background: #d4edda;
-    color: #155724;
-}
-
-.warning {
-    background: #fff3cd;
-    color: #856404;
+/* =========================================
+   MOBILE OPTIMIZATIONS (Max-Width 768px)
+========================================= */
+@media (max-width: 768px) {
+    /* Navbar: Stack Logo and Links if needed, or keep compact */
+    .navbar { padding: 0 15px; height: 60px; }
+    .brand-name { font-size: 1.2rem; }
+    .nav-item { font-size: 0.9rem; padding: 8px; }
+    
+    /* Hero Section */
+    .hero h1 { font-size: 1.5rem; margin: 15px 0; }
+    .home-mantra { padding: 10px; margin: 10px 0; }
+    .sanskrit { font-size: 1rem; }
+    
+    /* Grid adjustments for phones */
+    .sanskar-grid { grid-template-columns: 1fr 1fr; gap: 10px; } /* 2 columns on mobile */
+    .card img { height: 100px; }
+    .card h3 { font-size: 0.95rem; }
+    
+    /* Buttons: Make them full width for easy thumb tapping */
+    .btn { display: block; width: 100%; box-sizing: border-box; text-align: center; padding: 15px; margin-top: 10px; }
+    
+    /* Modal: Full width on mobile */
+    .modal-content { width: 90%; margin: 20% auto; padding: 20px; }
+    .close { top: 5px; right: 10px; }
+    
+    /* Form inputs */
+    input, select { font-size: 16px; } /* Prevents iOS zoom on focus */
 }
