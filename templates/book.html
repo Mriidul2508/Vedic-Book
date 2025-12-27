@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Schedule a Ceremony</h2>
+
+    {% if success %}
+    <div class="alert {{ 'success' if status == 'Confirmed' else 'warning' }}">
+        Booking Status: {{ status }} <br>
+        {% if priest %} Assigned to: {{ priest.name }} {% endif %}
+    </div>
+    {% endif %}
+
+    <form method="POST" id="bookingForm">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Ceremony Type</label>
+        <select name="ceremony">
+            <option value="Vivaha">Marriage (Vivaha)</option>
+            <option value="Namakarana">Naming (Namakarana)</option>
+            <option value="Griha Pravesh">House Warming</option>
+            <option value="Antyeshti">Funeral (Antyeshti)</option>
+            <option value="Upanayana">Thread Ceremony (Upanayana)</option>
+        </select>
+
+        <label>Date</label>
+        <input type="date" name="date" id="dateInput" required>
+
+        <label>Time Slot</label>
+        <select name="time" id="timeInput" required>
+            <option value="08:00 AM">08:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <option value="06:00 PM">06:00 PM</option>
+        </select>
+
+        <div id="availability-status"></div>
+
+        <button type="submit" class="btn">Confirm Booking</button>
+    </form>
+</div>
+{% endblock %}

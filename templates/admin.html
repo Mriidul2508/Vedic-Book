@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="card" style="cursor: default;">
+    <h3>Client Bookings</h3>
+    {% if bookings %}
+    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: left;">
+                <th style="padding: 10px;">Date</th>
+                <th style="padding: 10px;">Client</th>
+                <th style="padding: 10px;">Ceremony</th>
+                <th style="padding: 10px;">Priest</th>
+                <th style="padding: 10px;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in bookings %}
+            <tr>
+                <td style="padding: 8px;">{{ b.date }}</td>
+                <td style="padding: 8px;">{{ b.client_name }}</td>
+                <td style="padding: 8px;">{{ b.ceremony_type }}</td>
+                <td style="padding: 8px;">
+                    {% if b.priest %}
+                    {{ b.priest.name }}
+                    {% else %}
+                    <span style="color: red;">Unassigned</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 8px;">{{ b.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No bookings found.</p>
+    {% endif %}
+</div>
+
+<div class="card" style="margin-top: 20px; cursor: default;">
+    <h3>Priest Management</h3>
+    <ul style="list-style: none; padding: 0;">
+        {% for p in priests %}
+        <li style="padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+            <span><strong>{{ p.name }}</strong> ({{ p.specialty }})</span>
+            <span style="color: green;">{{ "Active" if p.is_active else "Inactive" }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
