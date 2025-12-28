@@ -89,7 +89,6 @@ body {
 .stat-card p { color: #555; line-height: 1.6; font-size: 1rem; }
 
 /* --- SANSKAR GRID (PC Optimized) --- */
-/* Restored to 260px so cards look big and nice on PC */
 .sanskar-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
@@ -167,7 +166,6 @@ input, select { width: 100%; padding: 12px; margin: 8px 0 20px; border: 1px soli
 
 /* =========================================
    MOBILE ONLY OVERRIDES (Max-Width 768px)
-   These rules only apply when on a phone
 ========================================= */
 @media (max-width: 768px) {
     /* Navbar compact */
