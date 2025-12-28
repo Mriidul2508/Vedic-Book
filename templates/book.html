@@ -3,18 +3,23 @@
 {% block content %}
 <div class="form-container">
     <h2>Schedule a Ceremony</h2>
-
+    
     {% if success %}
-    <div class="alert {{ 'success' if status == 'Confirmed' else 'warning' }}">
-        Booking Status: {{ status }} <br>
-        {% if priest %} Assigned to: {{ priest.name }} {% endif %}
-    </div>
+        <div class="alert {{ 'success' if status == 'Confirmed' else 'warning' }}">
+            Booking Status: {{ status }} <br>
+            {% if priest %} Assigned to: {{ priest.name }} {% endif %}
+        </div>
     {% endif %}
 
     <form method="POST" id="bookingForm">
         <label>Full Name</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" placeholder="Enter your full name" required>
 
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="example@mail.com" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" placeholder="+91 9876543210" pattern="[0-9+\s-]{10,15}" required>
         <label>Ceremony Type</label>
         <select name="ceremony">
             <option value="Vivaha">Marriage (Vivaha)</option>
@@ -22,6 +27,7 @@
             <option value="Griha Pravesh">House Warming</option>
             <option value="Antyeshti">Funeral (Antyeshti)</option>
             <option value="Upanayana">Thread Ceremony (Upanayana)</option>
+            <option value="General Puja">General Puja / Havan</option>
         </select>
 
         <label>Date</label>
