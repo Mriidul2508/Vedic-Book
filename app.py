@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///priest_booking.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'super_secret_key_for_vedic_booking'  # REQUIRED for login sessions
 db = SQLAlchemy(app)
 
 # --- Database Models ---
@@ -18,24 +19,26 @@ class Priest(db.Model):
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=False)  # NEW FIELD
+    phone = db.Column(db.String(20), nullable=False)   # NEW FIELD
     ceremony_type = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=False, index=True)
     time_slot = db.Column(db.String(20), nullable=False)
     status = db.Column(db.String(20), default="Pending")
     priest_id = db.Column(db.Integer, db.ForeignKey('priest.id'), nullable=True)
 
-# --- Detailed Data (Matching your file extensions exactly) ---
+# --- Detailed Data (Same as before) ---
 SANSKARS = [
     {
         "id": 1, "name": "Garbhadhana", "name_hi": "गर्भाधान", "purpose": "Conception", "age": "Pre-birth",
-        "image": "garbhadhana.png", # PNG
+        "image": "garbhadhana.png", 
         "mantra": "ॐ अहीनां त्वा पत्नीममिष्यामि कंसां त्वा पत्नीममिष्यामि ।",
         "desc_en": "The act of conception. Parents pray for a healthy and noble child.",
         "desc_hi": "यह पहला संस्कार है। माता-पिता एक स्वस्थ और गुणवान संतान के लिए प्रार्थना करते हैं।"
     },
     {
         "id": 2, "name": "Pumsavana", "name_hi": "पुंसवन", "purpose": "Fetus protection", "age": "3rd month",
-        "image": "pumsavana.png", # PNG
+        "image": "pumsavana.png", 
         "mantra": "ॐ पुमांसं पुत्रं जनय तं पुमाननु जायताम् ।",
         "desc_en": "Performed to ensure the health of the fetus and mother.",
         "desc_hi": "यह संस्कार गर्भस्थ शिशु और माता के स्वास्थ्य की रक्षा के लिए किया जाता है।"
@@ -180,6 +183,8 @@ def book():
         
         new_booking = Booking(
             client_name=data['name'],
+            email=data['email'],    # CAPTURE EMAIL
+            phone=data['phone'],    # CAPTURE PHONE
             ceremony_type=data['ceremony'],
             date=date_obj,
             time_slot=data['time'],
@@ -198,7 +203,6 @@ def check_availability():
     req = request.get_json()
     date_str = req.get('date')
     time_slot = req.get('time')
-    
     try:
         date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
         total_priests = Priest.query.count()
@@ -208,8 +212,33 @@ def check_availability():
     except:
         return jsonify({'available': False, 'slots_left': 0})
 
+# --- SECURE ADMIN ROUTES ---
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Simple Hardcoded Security
+        if username == 'admin' and password == 'admin123':
+            session['logged_in'] = True
+            return redirect(url_for('admin'))
+        else:
+            flash('Invalid credentials! Please try again.')
+    
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('login'))
+
 @app.route('/admin')
 def admin():
+    # Security Check: Redirect to login if not authenticated
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+        
     bookings = Booking.query.order_by(Booking.date.desc()).all()
     priests = Priest.query.all()
     return render_template('admin.html', bookings=bookings, priests=priests)
