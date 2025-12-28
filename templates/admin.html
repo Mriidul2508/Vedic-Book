@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Admin Dashboard</h2>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>Admin Dashboard</h2>
+    <a href="/logout" class="btn-small" style="background: #dc3545; color: white; border: none; padding: 8px 15px;">Logout</a>
+</div>
 
-<div class="card" style="cursor: default;">
+<div class="card" style="cursor: default; overflow-x: auto;">
     <h3>Client Bookings</h3>
     {% if bookings %}
-    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+    <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 10px; min-width: 800px;">
         <thead>
             <tr style="background-color: #f2f2f2; text-align: left;">
                 <th style="padding: 10px;">Date</th>
                 <th style="padding: 10px;">Client</th>
+                <th style="padding: 10px;">Contact</th> 
                 <th style="padding: 10px;">Ceremony</th>
                 <th style="padding: 10px;">Priest</th>
                 <th style="padding: 10px;">Status</th>
@@ -21,12 +25,16 @@
             <tr>
                 <td style="padding: 8px;">{{ b.date }}</td>
                 <td style="padding: 8px;">{{ b.client_name }}</td>
+                <td style="padding: 8px; font-size: 0.9rem;">
+                    📧 {{ b.email }}<br>
+                    📞 {{ b.phone }}
+                </td>
                 <td style="padding: 8px;">{{ b.ceremony_type }}</td>
                 <td style="padding: 8px;">
                     {% if b.priest %}
-                    {{ b.priest.name }}
+                        {{ b.priest.name }}
                     {% else %}
-                    <span style="color: red;">Unassigned</span>
+                        <span style="color: red;">Unassigned</span>
                     {% endif %}
                 </td>
                 <td style="padding: 8px;">{{ b.status }}</td>
@@ -35,7 +43,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>No bookings found.</p>
+        <p>No bookings found.</p>
     {% endif %}
 </div>
 
