@@ -3,18 +3,15 @@
 {% block content %}
 <header class="hero">
     <img src="{{ url_for('static', filename='images/banner.jpg') }}" alt="Vedic Ceremony Banner" class="hero-img">
-
+    
     <h1>Book a Priest for Your Ceremony</h1>
-
+    
     <div class="home-mantra">
-        <p class="sanskrit">ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ।<br>सर्वे भद्राणि पश्यन्तु मा
-            कश्चिद्दुःखभाग्भवेत् ॥</p>
-        <p class="meaning">May all be happy, may all be free from illness.<br>May all see what is auspicious, may no one
-            suffer.</p>
+        <p class="sanskrit">ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ।<br>सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत् ॥</p>
+        <p class="meaning">May all be happy, may all be free from illness.<br>May all see what is auspicious, may no one suffer.</p>
     </div>
 
-    <p style="margin-top: 20px; font-size: 1.1rem;">Seamless booking for all 16 Sanskars. Spiritual guidance at your
-        doorstep.</p>
+    <p style="margin-top: 20px; font-size: 1.1rem;">Seamless booking for all 16 Sanskars. Spiritual guidance at your doorstep.</p>
     <a href="/book" class="btn">Book a Priest</a>
 </header>
 
@@ -24,20 +21,17 @@
         <div class="stat-card">
             <div class="icon">🚀</div>
             <h3>High Performance</h3>
-            <p>Designed a booking platform capable of handling <strong>100 daily bookings</strong> with real-time status
-                updates.</p>
+            <p>Designed a booking platform capable of handling <strong>100 daily bookings</strong> with real-time status updates.</p>
         </div>
         <div class="stat-card">
             <div class="icon">📈</div>
             <h3>User Engagement</h3>
-            <p>Optimized application performance and UI flow, increasing user engagement metrics by
-                <strong>20%</strong>.</p>
+            <p>Optimized application performance and UI flow, increasing user engagement metrics by <strong>20%</strong>.</p>
         </div>
         <div class="stat-card">
             <div class="icon">🕉️</div>
             <h3>Cultural Heritage</h3>
-            <p>Digitized information on <strong>16 Vedic sanskars</strong> to enhance user cultural awareness and
-                accessibility.</p>
+            <p>Digitized information on <strong>16 Vedic sanskars</strong> to enhance user cultural awareness and accessibility.</p>
         </div>
     </div>
 </section>
@@ -45,12 +39,16 @@
 <h2 style="margin-top: 40px;">The 16 Sanskars (Click for Details)</h2>
 <div class="sanskar-grid">
     {% for s in sanskars %}
-    <div class="card sanskar-card" data-name="{{ s.name }}" data-namehi="{{ s.name_hi }}" data-descen="{{ s.desc_en }}"
-        data-deschi="{{ s.desc_hi }}" data-image="{{ url_for('static', filename='images/' + s.image) }}"
-        data-mantra="{{ s.mantra }}">
-
+    <div class="card sanskar-card" 
+         data-name="{{ s.name }}" 
+         data-namehi="{{ s.name_hi }}" 
+         data-descen="{{ s.desc_en }}" 
+         data-deschi="{{ s.desc_hi }}" 
+         data-image="{{ url_for('static', filename='images/' + s.image) }}" 
+         data-mantra="{{ s.mantra }}">
+        
         <img src="{{ url_for('static', filename='images/' + s.image) }}" alt="{{ s.name }}">
-
+        
         <h3>{{ s.name }}</h3>
         <small style="color: gray;">{{ s.name_hi }}</small>
         <p class="role">{{ s.purpose }}</p>
@@ -62,12 +60,12 @@
 <div id="infoModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
-
+        
         <img id="modalImage" src="" alt="Sanskar Image" class="modal-image">
-
+        
         <h2 id="modalTitle" style="margin-bottom: 5px;">Title</h2>
         <h3 id="modalTitleHi" style="color: #ff9933; margin-top: 0;">Hindi Title</h3>
-
+        
         <div class="mantra-box">
             <strong>Mantra:</strong><br>
             <span id="modalMantra"></span>
@@ -76,8 +74,7 @@
         <p><strong>English:</strong> <span id="modalDescEn"></span></p>
         <p><strong>Hindi:</strong> <span id="modalDescHi"></span></p>
         <br>
-        <a href="/book" class="btn" style="display: inline-block; text-align: center; width: 100%;">Book This
-            Ceremony</a>
+        <a href="/book" class="btn" style="display: block; text-align: center; width: 100%; box-sizing: border-box;">Book This Ceremony</a>
     </div>
 </div>
 {% endblock %}
